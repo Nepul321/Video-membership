@@ -1,3 +1,9 @@
 # Video Membership
 
-A simple video membership site with python and django
+A simple video membership site with,
+
+ - Python
+ - Django
+ - Django Rest Framework
+ - Bootstrap
+ - Javascript
