@@ -3,3 +3,4 @@ Scripts/
 Lib/
 Include/
 pyvenv.cfg
+db.sqlite3
