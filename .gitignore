@@ -4,3 +4,4 @@ Lib/
 Include/
 pyvenv.cfg
 db.sqlite3
+src/utils.py
