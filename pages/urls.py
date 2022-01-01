@@ -1,8 +1,12 @@
 from django.urls import path
 from .views import (
-    HomeView
+    HomeView,
+    VideosView,
+    PlayListsView
 )
 
 urlpatterns = [
-    path('', HomeView, name="home")
+    path('', HomeView, name="home"),
+    path('videos/', VideosView, name="videos"),
+    path('playlists/', PlayListsView, name="playlists")
 ]
