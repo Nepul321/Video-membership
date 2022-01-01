@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'pages',
     'videos',
     'playlists',
+    'authentication',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+TweetBook - Login
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1>Login</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+{% endblock content %}
+

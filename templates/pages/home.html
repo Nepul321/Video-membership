@@ -5,5 +5,9 @@ Video membership - Home
 {% endblock title %}
 
 {% block content %}
-<h1>Video membership site</h1>
+{% if user.is_authenticated %}
+<h1>Hello {{ user.username }}</h1>
+{% else %}
+<h1>Hello Visitor</h1>
+{% endif %}
 {% endblock content %}
