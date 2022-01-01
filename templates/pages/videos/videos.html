@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 Video membership - Videos
 {% endblock title %}
@@ -22,3 +24,7 @@ Video membership - Videos
     </div>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="{% static '/js/videos/videos.js' %}"></script>
+{% endblock js %}

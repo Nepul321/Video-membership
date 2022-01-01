@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 Video membership - Playlists
 {% endblock title %}
@@ -22,3 +24,7 @@ Video membership - Playlists
     </div>
 </div>
 {% endblock content %}
+
+{% block js %}
+<script src="{% static '/js/playlists/playlists.js' %}"></script>
+{% endblock js %}
