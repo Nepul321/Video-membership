@@ -3,24 +3,24 @@
 {% load static %}
 
 {% block title %}
-Video membership - Login
+Video membership - Sign up
 {% endblock title %}
 
 {% block content %}
 <div class="container my-5">
-    <h1>Login</h1>
+    <h1>Sign up</h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary">Login</button>
+        <button class="btn btn-primary">Sign up</button>
     </form>
     <div class="my-3">
-        <p>Don't have an account ? <a href="{% url 'signup' %}">Sign up</a></p>
+        <p>Already have an account ? <a href="{% url 'accounts-login' %}">Login</a></p>
     </div>
 </div>
 
 {% endblock content %}
 
 {% block js %}
-<script src="{% static '/js/auth/login.js' %}"></script>
+<script src="{% static '/js/auth/signup.js' %}"></script>
 {% endblock js %}
