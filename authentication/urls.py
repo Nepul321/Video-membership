@@ -5,7 +5,8 @@ from .views import (
     SignUpView,
     ActivateAccountView,
     AccountView,
-    PasswordView
+    PasswordView,
+    DeleteAccountView
 )
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('activate-account/<token>/', ActivateAccountView, name="activate"),
     path('account/', AccountView, name="account"),
     path('password/', PasswordView, name="password"),
+    path('delete/', DeleteAccountView, name="delete"),
 ]

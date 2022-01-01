@@ -148,3 +148,16 @@ def PasswordView(request):
         'form' : form
         }
 	return render(request, template, context)
+
+@login_required
+def DeleteAccountView(request):
+    template = "auth/accounts/delete.html"
+    if request.method == "POST":
+        user = User.objects.get(id=request.user.id)
+        user.delete()
+        return redirect('home')
+    context = {
+
+    }
+
+    return render(request, template, context)
