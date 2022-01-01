@@ -31,7 +31,8 @@ from .decorators import (
 )
 
 from .forms import (
-    SignUpForm
+    SignUpForm,
+    AccountForm
 )
 
 current_host = "http://localhost:8000"
@@ -114,3 +115,18 @@ def ActivateAccountView(request, token):
         template = 'auth/accounts/email_verified.html'
         context = {}
         return render(request, template, context)
+
+@login_required
+def AccountView(request):
+    template = "auth/accounts/account.html"
+    form = AccountForm(instance=request.user)
+    if request.method == "POST":
+        form = AccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+    context = {
+     'form' : form,
+    }
+
+    return render(request, template, context)
