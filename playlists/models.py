@@ -9,3 +9,6 @@ class PlayList(models.Model):
     date = models.DateField(auto_now_add=True)
     datetime = models.DateTimeField(auto_now_add=True)
     videos = models.ManyToManyField(Video, blank=True, related_name="playlist_videos")
+
+    class Meta:
+        ordering = ['-datetime']

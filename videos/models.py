@@ -11,3 +11,6 @@ class Video(models.Model):
     date = models.DateField(auto_now_add=True)
     views = models.IntegerField(default=0)
     available = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-datetime']
