@@ -23,11 +23,23 @@ def VideosListView(request):
     data = serializer.data
     return Response(data, status=200)
 
-@api_view(['GET'])
+@api_view(['GET', 'POST', 'DELETE'])
 def VideoDetailView(request, id):
     qs = Video.objects.filter(id=id)
+    if not qs.exists():
+        return Response({'message' : 'Not found'})
     available = qs.filter(available=True)
+    if not available.exists():
+        return Response({'message' : 'Is not available'})
     obj = available.first()
+    if request.method == "POST" and request.user.is_superuser:
+        serializer = VideoDetailSerializer(instance=obj, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=200)
+    if request.method == "DELETE" and request.user.is_superuser:
+        obj.delete()
+        return Response({"message" : "Video deleted"}, status=200)
     serializer = VideoDetailSerializer(obj)
     data = serializer.data
     return Response(data, status=200)
