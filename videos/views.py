@@ -27,10 +27,10 @@ def VideosListView(request):
 def VideoDetailView(request, id):
     qs = Video.objects.filter(id=id)
     if not qs.exists():
-        return Response({'message' : 'Not found'})
+        return Response({'message' : 'Not found'}, status=404)
     available = qs.filter(available=True)
     if not available.exists():
-        return Response({'message' : 'Is not available'})
+        return Response({'message' : 'Is not available'}, status=404)
     obj = available.first()
     if request.method == "POST" and request.user.is_superuser:
         serializer = VideoDetailSerializer(instance=obj, data=request.data)

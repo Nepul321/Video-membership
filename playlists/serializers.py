@@ -8,7 +8,7 @@ class PlayListSerializer(serializers.ModelSerializer):
     videos = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = PlayList
-        fields = ('title', 'date', 'videos')
+        fields = ('id', 'title', 'date', 'videos')
 
     def get_videos(self, obj):
         videos = obj.videos.all()
