@@ -9,6 +9,10 @@ from rest_framework.decorators import (
     api_view
 )
 
+from videos.models import (
+    Video
+)
+
 from playlists.models import PlayList
 from playlists.serializers import PlayListSerializer
 
@@ -52,3 +56,23 @@ def PlayListCreate(request):
         return Response(data, status=201)
 
     return Response({}, status=401)
+
+@api_view(['POST'])
+def AddVideoToPlayList(request):
+    data = request.data
+    playlistId = data['playlist_id']
+    videoId = data['video_id']
+    if not playlistId or not videoId:
+        return Response({"message" : "No data given"}, status=400)
+    playListQS = PlayList.objects.filter(id=playlistId)
+    if not playListQS:
+        return Response({"message" : "Playlist not found"}, status=404)
+    videoQS = Video.objects.filter(id=videoId)
+    if not videoQS:
+        return Response({"message" : "Video not found"}, status=404)
+
+    videoObj = videoQS.first()
+    playlistObj = playListQS.first()
+
+    playlistObj.videos.add(videoObj)   
+    return Response({"message" : "Video added to playlist"}, status=200)

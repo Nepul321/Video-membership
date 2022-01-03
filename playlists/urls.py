@@ -1,4 +1,5 @@
 from .views import (
+    AddVideoToPlayList,
     AllPlayLists,
     PlayListCreate,
     PlayListDetail
@@ -10,4 +11,5 @@ urlpatterns = [
     path('', AllPlayLists, name="all-playlists"),
     path('<int:id>/', PlayListDetail, name="playlist-detail"),
     path('create/', PlayListCreate, name="playlist-create"),
+    path('add-video-to-playlist/', AddVideoToPlayList, name="add-video-to-playlist")
 ]
