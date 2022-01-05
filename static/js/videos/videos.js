@@ -20,7 +20,38 @@ function getVideos() {
 }
 
 function insertVideos(data) {
-    console.log(data)
+        data.forEach((item) => {
+        const card = document.createElement("div")
+        card.className = "card mb-3"
+        const row = document.createElement("div")
+        row.className = "row g-0"
+        const column = document.createElement("div")
+        column.className = "col-md-4"
+        const column_2 = document.createElement("div")
+        column_2.className = "col-md-8"
+        const card_body = document.createElement("div")
+        card_body.className = "card-body"
+        
+        column.innerHTML = `
+        <img src=${item.thumbnail_image} class="img-fluid rounded-start" alt="..." />
+        `
+
+        card_body.innerHTML = `
+        <p style="font-size: 25px;" class="card-title"><a href="">${item.title}</a></p>
+        <p class="card-text">${item.description}</p>
+        <p>Views : ${item.views}</p>
+        <p class="small text-muted">${item.date}</p>
+        `
+        column_2.appendChild(card_body)
+
+        row.appendChild(column)
+        row.appendChild(column_2)
+        card.appendChild(row)
+
+        root.appendChild(card)
+
+
+    })
 }
 
 getVideos();
