@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
 from videos.models import Video
 from playlists.models import PlayList
+from .forms import (
+    VideoCreateForm
+)
 
 def HomeView(request):
     template = "pages/home.html"
@@ -12,8 +15,9 @@ def HomeView(request):
 
 def VideosView(request):
     template = "pages/videos/videos.html"
+    form = VideoCreateForm()
     context = {
-
+       'form' : form,
     }
 
     return render(request, template, context)
@@ -51,7 +55,7 @@ def PlayListView(request, id):
     if not qs:
         return redirect('playlists')
     obj = qs.first()
-    videos = obj.videos.all()
+    videos = obj.videos.filter(available=True)
     context = {
       'obj' : obj,
       'videos' : videos,

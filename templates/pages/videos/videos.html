@@ -12,6 +12,11 @@ Video membership - Videos
     <div class="card">
         <div class="card-body">
             <h3>Create Video</h3>
+            <form id="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-primary">Create</button>
+            </form>
         </div>
     </div>
 </div>

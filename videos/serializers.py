@@ -9,9 +9,9 @@ class VideoListSerializer(serializers.ModelSerializer):
 class VideoDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
-        fields = ('id', 'title', 'youtube_url', 'thumbnail_image', 'description', 'date', 'views')
+        fields = ('id', 'title', 'youtube_url', 'thumbnail_image', 'description', 'date', 'views', 'available')
 
 class VideoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
-        fields = ('id', 'title', 'youtube_url', 'thumbnail_image', 'description')
+        fields = ('id', 'title', 'youtube_url', 'thumbnail_image', 'description', 'available', 'date', 'views')
