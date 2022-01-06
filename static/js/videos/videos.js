@@ -37,7 +37,7 @@ function insertVideos(data) {
         `
 
         card_body.innerHTML = `
-        <p style="font-size: 25px;" class="card-title"><a href="">${item.title}</a></p>
+        <p style="font-size: 25px;" class="card-title"><a href="/videos/${item.id}/">${item.title}</a></p>
         <p class="card-text">${item.description}</p>
         <p>Views : ${item.views}</p>
         <p class="small text-muted">${item.date}</p>
