@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Playlist - {{ obj.title }}
+{% endblock title %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="container my-3">
+</div>
+{% endif %}
+<div class="container my-5">
+    <h1>{{ obj.title }}</h1>
+    <hr />
+    {% for video in videos %}
+    <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ video.thumbnail_image.url }}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+                <p style="font-size: 25px;" class="card-title"><a href="/videos/{{video.id}}/">{{ video.title }}</a></p>
+                <p>
+                Views : {{ video.views }}
+                </p>
+              <p class="card-text"><small class="text-muted">On {{ video.date }}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}
