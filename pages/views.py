@@ -35,12 +35,16 @@ def VideoView(request, id):
     qs = Video.objects.filter(id=id)
     if not qs:
         return redirect('videos')
-    available = qs.filter(available=True)
-    if not available:
-        return redirect('videos')
-    obj = available.first()
-    obj.views = obj.views + 1
-    obj.save()
+    if not request.user.is_superuser:
+        available = qs.filter(available=True)
+        if not available:
+            return redirect('videos')
+        obj = available.first()
+        obj.views = obj.views + 1
+        obj.save()
+    else:
+        obj = qs.first()
+        
     video_id = obj.youtube_url.replace("https://www.youtube.com/watch?v=", "")
     context = {
         'obj' : obj,

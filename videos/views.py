@@ -18,7 +18,10 @@ from .models import Video
 
 @api_view(['GET'])
 def VideosListView(request):
-    qs = Video.objects.filter(available=True)
+    if not request.user.is_superuser:
+        qs = Video.objects.filter(available=True)
+    else:
+        qs = Video.objects.all()
     serializer = VideoListSerializer(qs, many=True)
     data = serializer.data
     return Response(data, status=200)
@@ -47,8 +50,9 @@ def VideoDetailView(request, id):
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def VideoCreateView(request):
+    context = {'request' : request}
     data = request.data
-    serializer = VideoCreateSerializer(data=data)
+    serializer = VideoCreateSerializer(data=data, context=context)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
         return Response(serializer.data, status=201)

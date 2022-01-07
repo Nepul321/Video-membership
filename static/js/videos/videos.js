@@ -65,7 +65,7 @@ if (form) {
         xhr.onload = () => {
             if (xhr.status === 201) {
                 const responseData = JSON.parse(xhr.response)
-                if (responseData.available === true) {
+                if (responseData.is_superuser === true) {
                     root.innerHTML = addNewPost(responseData) + root.innerHTML
                 }
               } else if(xhr.status === 400) {
