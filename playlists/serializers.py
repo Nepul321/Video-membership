@@ -28,7 +28,7 @@ class PlayListSerializer(serializers.ModelSerializer):
 
     def get_thumbnail(self, obj):
         videos = obj.videos.all()
-        url = ""
+        url = "https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
         if videos:
             current_obj = videos.first()
             url = current_obj.thumbnail_image.url
