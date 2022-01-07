@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from videos.models import Video
 from playlists.models import PlayList
 from .forms import (
+    PlayListCreateForm,
     VideoCreateForm
 )
 
@@ -24,8 +25,9 @@ def VideosView(request):
 
 def PlayListsView(request):
     template = "pages/playlists/playlists.html"
+    form = PlayListCreateForm()
     context = {
-
+      'form' : form
     }
 
     return render(request, template, context)
