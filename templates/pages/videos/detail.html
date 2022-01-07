@@ -1,5 +1,8 @@
 {% extends 'base.html' %} 
 {% block title %} {{ obj.title }} {% endblock title %}
+
+{% load static %}
+
 {% block css %}
 <style>
     
@@ -26,7 +29,7 @@
 {% if user.is_superuser %}
 <div class="container my-5"></div>
 {% endif %}
-<div class="container my-5">
+<div class="container my-5" id="data" data-id="{{ obj.id }}">
   <h2>{{ obj.title }}</h2>
   <div class="iframe-container">
     <iframe
@@ -42,9 +45,12 @@
   <p class="description">{{ obj.description | safe }}</p>
   <p>Views : {{ obj.views }}</p>
   <p class="text-muted">{{ obj.date }}</p>
+  {% if user.is_superuser %}
+   <button class="btn btn-danger" id="delete">Delete</button>
+  {% endif %}
 </div>
 {% endblock content %} 
 
-{% block js %} 
-
+{% block js %}
+<script src="{% static '/js/videos/details.js' %}"></script>
 {% endblock js %}
