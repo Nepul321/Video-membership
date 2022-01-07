@@ -4,6 +4,8 @@
 Playlist - {{ obj.title }}
 {% endblock title %}
 
+{% load static %}
+
 {% block content %}
 {% if user.is_superuser %}
 <div class="container my-3">
@@ -30,8 +32,12 @@ Playlist - {{ obj.title }}
         </div>
       </div>
     {% endfor %}
+    {% if request.user.is_superuser %}
+    <button class="btn btn-danger" id="deleteBtn" data-id="{{ obj.id }}">Delete Playlist</button>
+    {% endif %}
 </div>
 {% endblock content %}
 
 {% block js %}
+<script src="{% static '/js/playlists/videos.js' %}"></script>
 {% endblock js %}
