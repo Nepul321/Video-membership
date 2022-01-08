@@ -1,9 +1,13 @@
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from videos.models import Video
 from playlists.models import PlayList
 from .forms import (
     PlayListCreateForm,
     VideoCreateForm
+)
+from django.urls import (
+    reverse
 )
 
 def HomeView(request):
@@ -48,9 +52,16 @@ def VideoView(request, id):
         obj = qs.first()
         
     video_id = obj.youtube_url.replace("https://www.youtube.com/watch?v=", "")
+    form = VideoCreateForm(instance=obj)
+    if request.method == "POST":
+        form = VideoCreateForm(request.POST, request.FILES, instance=obj)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('video', args=(obj.id, )))
     context = {
         'obj' : obj,
         'video_id' : video_id,
+        'form' : form
     }
 
     return render(request, template, context)

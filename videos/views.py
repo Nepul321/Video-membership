@@ -36,7 +36,8 @@ def VideoDetailView(request, id):
     #     return Response({'message' : 'Is not available'}, status=404)
     obj = qs.first()
     if request.method == "POST" and request.user.is_superuser:
-        serializer = VideoDetailSerializer(instance=obj, data=request.data)
+        data = request.data
+        serializer = VideoDetailSerializer(instance=obj, data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=200)

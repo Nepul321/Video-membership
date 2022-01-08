@@ -68,8 +68,6 @@ if (form) {
                 if (responseData.is_superuser === true) {
                     root.innerHTML = addNewPost(responseData) + root.innerHTML
                 }
-              } else if(xhr.status === 400) {
-                alert("Input empty or Post too long")
               } else if (xhr.status === 401 || xhr.status === 403) {
                 alert("Authentication error");
                 window.location.href = "/accounts/login/?next=/";
