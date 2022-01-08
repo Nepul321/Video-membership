@@ -64,8 +64,6 @@ if (form) {
             if (xhr.status === 201) {
                 const responseData = JSON.parse(xhr.response)
                 root.innerHTML = addNewPlayList(responseData) + root.innerHTML
-              } else if(xhr.status === 400) {
-                alert("Input empty or Post too long")
               } else if (xhr.status === 401 || xhr.status === 403) {
                 alert("Authentication error");
                 window.location.href = "/accounts/login/?next=/";

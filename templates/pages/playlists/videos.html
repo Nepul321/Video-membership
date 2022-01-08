@@ -12,7 +12,7 @@ Playlist - {{ obj.title }}
 </div>
 {% endif %}
 <div class="container my-5">
-    <h1>{{ obj.title }}</h1>
+    <h1 id="title">{{ obj.title }}</h1>
     <hr />
     {% for video in videos %}
     <div class="card mb-3">
@@ -34,6 +34,27 @@ Playlist - {{ obj.title }}
     {% endfor %}
     {% if request.user.is_superuser %}
     <button class="btn btn-danger" id="deleteBtn" data-id="{{ obj.id }}">Delete Playlist</button>
+    {% endif %}
+    {% if request.user.is_superuser %}
+    <div class="card my-3">
+      <div class="card-body">
+        <h3>Update</h3>
+        <form id="form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+    {% if request.user.is_superuser %}
+   <div class="card">
+     <div class="card-body">
+       <h3>Add/Remove videos</h3>
+       <p>Add videos to this playlist or remove existing ones</p>
+       <a href="" class="btn btn-secondary">Add/Remove videos +</a>
+     </div>
+   </div>
     {% endif %}
 </div>
 {% endblock content %}

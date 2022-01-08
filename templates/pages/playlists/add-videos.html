@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add videos to Playlist - {{ obj.title }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container"></div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static '/js/playlists/add-videos.js %}"></script>
+{% endblock js %}

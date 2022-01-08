@@ -73,9 +73,19 @@ def PlayListView(request, id):
         return redirect('playlists')
     obj = qs.first()
     videos = obj.videos.filter(available=True)
+    form = PlayListCreateForm(instance=obj)
     context = {
       'obj' : obj,
       'videos' : videos,
+      'form' : form,
+    }
+
+    return render(request, template, context)
+
+def AddVideosToPlayList(request, id):
+    template = ""
+    context = {
+
     }
 
     return render(request, template, context)

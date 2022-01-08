@@ -1,4 +1,5 @@
 const deleteBtn = document.getElementById("deleteBtn");
+const form = document.getElementById("form");
 
 function getCookie(name) {
   let cookieValue = null;
@@ -13,6 +14,39 @@ function getCookie(name) {
     }
   }
   return cookieValue;
+}
+
+if (form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target
+    const formData = new FormData(form)
+    const method = "POST"
+    const data = deleteBtn.dataset
+    const id = data.id
+    const endpoint = `/api/playlists/${id}/`
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, endpoint)
+    
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const responseData = JSON.parse(xhr.response)
+        const title = responseData.title
+        document.getElementById("title").textContent = title
+      } else if (xhr.status === 401 || xhr.status === 403) {
+        alert("Authentication error");
+        window.location.href = "/accounts/login/?next=/";
+      } else if (xhr.status === 500) {
+        alert("Please try again");
+      }
+    }
+
+    xhr.onerror = () => {
+      alert("Please try again.")
+    }
+
+    xhr.send(formData)
+  })
 }
 
 if (deleteBtn) {
