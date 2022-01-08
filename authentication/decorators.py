@@ -17,3 +17,12 @@ def not_active_user(view_func):
 			return view_func(request, *args, **kwargs)
 
 	return wrapper_func
+
+def is_super_user(view_func):
+	def wrapper_func(request, *args, **kwargs):
+		if not request.user.is_superuser:
+			return redirect('/')
+		else:
+			return view_func(request, *args, **kwargs)
+
+	return wrapper_func

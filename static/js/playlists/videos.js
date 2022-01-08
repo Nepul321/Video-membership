@@ -34,8 +34,7 @@ if (form) {
         const title = responseData.title
         document.getElementById("title").textContent = title
       } else if (xhr.status === 401 || xhr.status === 403) {
-        alert("Authentication error");
-        window.location.href = "/accounts/login/?next=/";
+        alert("Forbidden.");
       } else if (xhr.status === 500) {
         alert("Please try again");
       }

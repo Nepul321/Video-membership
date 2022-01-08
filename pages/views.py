@@ -10,6 +10,8 @@ from django.urls import (
     reverse
 )
 
+from authentication.decorators import is_super_user
+
 def HomeView(request):
     template = "pages/home.html"
     context = {
@@ -72,7 +74,10 @@ def PlayListView(request, id):
     if not qs:
         return redirect('playlists')
     obj = qs.first()
-    videos = obj.videos.filter(available=True)
+    if not request.user.is_superuser:
+        videos = obj.videos.filter(available=True)
+    else:
+        videos = obj.videos.all()
     form = PlayListCreateForm(instance=obj)
     context = {
       'obj' : obj,
@@ -82,10 +87,15 @@ def PlayListView(request, id):
 
     return render(request, template, context)
 
+@is_super_user
 def AddVideosToPlayList(request, id):
-    template = ""
+    template = "pages/playlists/add-videos.html"
+    qs = PlayList.objects.filter(id=id)
+    if not qs:
+        return redirect('playlists')
+    obj = qs.first()
     context = {
-
+      'obj' : obj,
     }
 
     return render(request, template, context)

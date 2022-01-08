@@ -50,9 +50,9 @@ Playlist - {{ obj.title }}
     {% if request.user.is_superuser %}
    <div class="card">
      <div class="card-body">
-       <h3>Add/Remove videos</h3>
-       <p>Add videos to this playlist or remove existing ones</p>
-       <a href="" class="btn btn-secondary">Add/Remove videos +</a>
+       <h3>Add videos</h3>
+       <p>Add videos to this playlist</p>
+       <a href="{% url 'add-videos' obj.id %}" class="btn btn-secondary">Add videos +</a>
      </div>
    </div>
     {% endif %}

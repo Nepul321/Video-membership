@@ -15,6 +15,9 @@ from videos.models import (
 
 from playlists.models import PlayList
 from playlists.serializers import PlayListSerializer
+from videos.serializers import (
+    VideoListSerializer
+)
 
 @api_view(['GET'])
 def AllPlayLists(request):
@@ -76,3 +79,19 @@ def AddVideoToPlayList(request):
 
     playlistObj.videos.add(videoObj)   
     return Response({"message" : "Video added to playlist"}, status=200)
+
+@api_view(['GET'])
+def GetVideosNotInPlaylist(request, id):
+    data = []
+    qs = PlayList.objects.filter(id=id)
+    if not qs:
+        return Response({"message" : "Playlist not found"}, status=404)
+    obj = qs.first()
+    videosInObj = obj.videos.all()
+    videoQs = Video.objects.all()
+    for video in videoQs:
+        if video not in videosInObj:
+            data.append(video)
+
+    serializer = VideoListSerializer(data, many=True)
+    return Response(serializer.data, status=200)

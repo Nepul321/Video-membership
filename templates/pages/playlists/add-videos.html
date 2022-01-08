@@ -7,9 +7,16 @@ Add videos to Playlist - {{ obj.title }}
 {% load static %}
 
 {% block content %}
-<div class="container"></div>
+<div class="container my-5" data-id="{{ obj.id }}">
+    <h1>Add videos to {{ obj.title }}</h1>
+    <hr />
+    <div id="root">
+        
+    </div>
+    <a class="btn btn-secondary" href="{% url 'playlist' obj.id %}">Back to playlist</a>
+</div>
 {% endblock content %}
 
 {% block js %}
-<script src="{% static '/js/playlists/add-videos.js %}"></script>
+<script src="{% static '/js/playlists/add-videos.js' %}"></script>
 {% endblock js %}
