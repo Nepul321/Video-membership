@@ -123,9 +123,14 @@ def AccountView(request):
     template = "auth/accounts/account.html"
     form = AccountForm(instance=request.user)
     if request.method == "POST":
-        form = AccountForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
+        email = request.POST['email']
+        qs = User.objects.filter(email=email)
+        if not qs:
+            form = AccountForm(request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('account')
+        else:
             return redirect('account')
     context = {
      'form' : form,
