@@ -61,10 +61,11 @@ def PlayListCreate(request):
     return Response({}, status=401)
 
 @api_view(['POST'])
-def AddVideoToPlayList(request):
+def AddRemoveVideoToPlayList(request):
     data = request.data
     playlistId = data['playlist_id']
     videoId = data['video_id']
+    action = data['action']
     if not playlistId or not videoId:
         return Response({"message" : "No data given"}, status=400)
     playListQS = PlayList.objects.filter(id=playlistId)
@@ -76,8 +77,13 @@ def AddVideoToPlayList(request):
 
     videoObj = videoQS.first()
     playlistObj = playListQS.first()
-
-    playlistObj.videos.add(videoObj)   
+    
+    if action == "add":
+       playlistObj.videos.add(videoObj)
+    elif action == "remove":
+       playlistObj.videos.remove(videoObj)
+    else:
+       return Response({"message" : "Action not valid"}, status=404)   
     return Response({"message" : "Video added to playlist"}, status=200)
 
 @api_view(['GET'])

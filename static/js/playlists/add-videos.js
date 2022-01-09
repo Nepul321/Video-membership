@@ -47,7 +47,7 @@ function updateHtmlonchange(id) {
  }
 }
 
-function addvideostoPlayList(id) {
+function addvideostoPlayList(id, action) {
   const video_id = id;
   const playlist_id = container.dataset.id;
   const method = "POST";
@@ -55,6 +55,7 @@ function addvideostoPlayList(id) {
   const data = {
     video_id: video_id,
     playlist_id: playlist_id,
+    action: action
   };
   const xhr = new XMLHttpRequest();
   const csrftoken = getCookie("csrftoken");
@@ -108,7 +109,7 @@ function insertVideos(data) {
     card_body.innerHTML = `
     <p style="font-size: 25px;" class="card-title"><a href="/videos/${item.id}/">${item.title}</a></p>
     <p>Views : ${item.views}</p>
-    <button class="btn btn-primary" onclick="addvideostoPlayList(${item.id})">Add to playlist</button>
+    <button class="btn btn-primary" onclick="addvideostoPlayList(${item.id}, 'add')">Add to playlist</button>
     <p class="small text-muted">${item.date}</p>
     `;
     column_2.appendChild(card_body);

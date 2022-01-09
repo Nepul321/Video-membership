@@ -5,6 +5,7 @@ from .models import (
     PlayList
 )
 
+
 class PlayListSerializer(serializers.ModelSerializer):
     videos = serializers.SerializerMethodField(read_only=True)
     thumbnail = serializers.SerializerMethodField(read_only=True)
@@ -33,4 +34,4 @@ class PlayListSerializer(serializers.ModelSerializer):
             current_obj = videos.first()
             url = current_obj.thumbnail_image.url
 
-        return url
+        return url 
