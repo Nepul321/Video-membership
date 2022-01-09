@@ -151,6 +151,25 @@ if DEBUG:
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+DEFAULT_RENDERER_CLASSES = [
+       'rest_framework.renderers.JSONRenderer',
+]
+
+DEFAULT_AUTHENTICATION_CLASSES = [
+    'rest_framework.authentication.SessionAuthentication',
+]
+
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES += [
+        'rest_framework.renderers.BrowsableAPIRenderer', 
+        
+    ]
+
+REST_FRAMEWORK = {
+   "DEFAULT_AUTHENTICATION_CLASSES" : DEFAULT_AUTHENTICATION_CLASSES,
+   "DEFAULT_RENDERER_CLASSES" : DEFAULT_RENDERER_CLASSES
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
