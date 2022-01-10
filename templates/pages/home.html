@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 Video membership - Home
 {% endblock title %}
 
+{% block css %} 
+<link rel="stylesheet" href="{% static '/css/home.css' %}" />
+{% endblock css %}
+
 {% block content %}
-<div class="container my-5">
-    {% if user.is_authenticated %}
-    <h1>Hello {{ user.username }}</h1>
-    {% else %}
-    <h1>Hello Visitor</h1>
-    {% endif %}
+<div class="banner">
+<div class="text bg-primary">
+    <h1>Video membership</h1>
+    <p>Learn to build real projects with code.</p>
+    <div class="btn-group">
+        <a href="{% url 'signup' %}" class="btn btn-success">Sign up</a>
+        <a href="{% url 'accounts-login' %}" class="btn btn-secondary">Login</a>
+    </div>
+</div>
 </div>
 {% endblock content %}
