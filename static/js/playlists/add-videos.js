@@ -41,10 +41,10 @@ function getVideos() {
 }
 
 function updateHtmlonchange(id) {
- const element = document.getElementById(`video-${id}`)
- if (element) {
-     root.removeChild(element)
- }
+  const element = document.getElementById(`video-${id}`);
+  if (element) {
+    root.removeChild(element);
+  }
 }
 
 function addvideostoPlayList(id, action) {
@@ -55,7 +55,7 @@ function addvideostoPlayList(id, action) {
   const data = {
     video_id: video_id,
     playlist_id: playlist_id,
-    action: action
+    action: action,
   };
   const xhr = new XMLHttpRequest();
   const csrftoken = getCookie("csrftoken");
@@ -74,8 +74,8 @@ function addvideostoPlayList(id, action) {
       alert(message);
     } else if (xhr.status === 401 || xhr.status === 403) {
       alert("Forbidden.");
-    } else if(xhr.status === 400) {
-        alert("Bad request");
+    } else if (xhr.status === 400) {
+      alert("Bad request");
     } else if (xhr.status === 500) {
       alert("An error occurred. Please try again.");
     }

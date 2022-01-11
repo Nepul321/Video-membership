@@ -1,7 +1,7 @@
 const deleteBtn = document.getElementById("deleteBtn");
 const form = document.getElementById("form");
 const removeBtns = document.querySelectorAll(".btn-remove");
-const root = document.getElementById("root")
+const root = document.getElementById("root");
 
 function getCookie(name) {
   let cookieValue = null;
@@ -19,10 +19,10 @@ function getCookie(name) {
 }
 
 function updateHtmlonchange(id) {
- const element = document.getElementById(`video-${id}`);
- if (element) {
-   root.removeChild(element)
- }
+  const element = document.getElementById(`video-${id}`);
+  if (element) {
+    root.removeChild(element);
+  }
 }
 
 removeBtns.forEach((btn) => {
