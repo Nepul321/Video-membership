@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv, find_dotenv
+import django_heroku
 
 load_dotenv(find_dotenv())
 
@@ -34,7 +35,12 @@ CURRENT_DEBUG = DEBUG_OPTIONS[CURRENT_DEBUG_STATUS]
 
 DEBUG = CURRENT_DEBUG
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+if not DEBUG:
+    ALLOWED_HOSTS = ['', ]
+
 LOGIN_URL = 'accounts-login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -106,6 +112,9 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -185,7 +194,12 @@ REST_FRAMEWORK = {
    "DEFAULT_RENDERER_CLASSES" : DEFAULT_RENDERER_CLASSES
 }
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_heroku.settings(locals())
