@@ -39,7 +39,7 @@ if DEBUG:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 if not DEBUG:
-    ALLOWED_HOSTS = ['', ]
+    ALLOWED_HOSTS = ['videomembership.herokuapp.com', ]
 
 LOGIN_URL = 'accounts-login'
 LOGIN_REDIRECT_URL = 'home'
