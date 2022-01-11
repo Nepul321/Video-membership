@@ -153,10 +153,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
-if DEBUG:
-    STATICFILES_DIRS = [
+
+STATICFILES_DIRS = [
         BASE_DIR / 'static'
-    ]
+]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
