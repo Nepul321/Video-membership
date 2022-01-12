@@ -12,13 +12,13 @@ Video membership - Home
 
 {% block content %}
 <div class="banner">
-<div class="text bg-primary">
+<div class="text bg-secondary">
     <h1>Video membership</h1>
     <p>Learn to build real projects with code.</p>
     {% if not user.is_authenticated %}
     <div class="btn-group">
         <a href="{% url 'signup' %}" class="btn btn-success">Sign up</a>
-        <a href="{% url 'accounts-login' %}" class="btn btn-secondary">Login</a>
+        <a href="{% url 'accounts-login' %}" class="btn btn-primary">Login</a>
     </div>
     {% endif %}
 </div>
