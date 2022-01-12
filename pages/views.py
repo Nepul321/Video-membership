@@ -48,8 +48,9 @@ def VideoView(request, id):
         if not available:
             return redirect('videos')
         obj = available.first()
-        obj.views = obj.views + 1
-        obj.save()
+        if request.user.is_authenticated:
+            obj.views = obj.views + 1
+            obj.save()
     else:
         obj = qs.first()
         
